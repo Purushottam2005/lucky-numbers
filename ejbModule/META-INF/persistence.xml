@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
+   version="2.0">
+    <persistence-unit name="JPADB">
+    <jta-data-source>java:/MySQLDS</jta-data-source>
+   <class>com.ibytecode.entities.User</class> 
+    <class>com.ibytecode.entities.Item</class>
+    <class>com.ibytecode.entities.Feed</class>
+        <properties>
+        	<property name="eclipselink.ddl-generation" value="create-tables" />
+            <property name="showSql" value="true"/>
+            <property name="hibernate.hbm2ddl.auto" value="create" />
+            <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />
+            <property name="hibernate.show_sql" value="true"/>
+	      	<property name="hibernate.format_sql" value="true"/>
+	      	<!-- <property name="hibernate.transaction.flush_before_completion" value="true"/>  -->
+        </properties>
+    </persistence-unit>
+</persistence>

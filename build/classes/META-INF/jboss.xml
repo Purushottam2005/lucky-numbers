@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<!DOCTYPE jboss PUBLIC "-//JBoss//DTD JBOSS 3.2//EN" "http://www.jboss.org/j2ee/dtd/jboss_3_2.dtd">
+<jboss>
+  <enterprise-beans>
+    <session>
+      <ejb-name>FancyListBean</ejb-name>
+      <jndi-name>cool-number-list</jndi-name>
+    </session>
+    <session>
+      <ejb-name>NumberListServiceBean</ejb-name>
+      <jndi-name>NumberListCreator</jndi-name>
+    </session>
+    <session>
+      <ejb-name>NumberServiceBean</ejb-name>
+      <jndi-name>NumberCreator</jndi-name>
+    </session>
+    <session>
+      <ejb-name>DataFetchServiceBean</ejb-name>
+      <jndi-name>DaoFetcher</jndi-name>
+    </session>
+    <session>
+      <ejb-name>UserManagementServiceBean</ejb-name>
+      <jndi-name>UserManager</jndi-name>
+    </session>
+     <session>
+      <ejb-name>ReaderServiceBean</ejb-name>
+      <jndi-name>ReadeBean</jndi-name>
+    </session>
+    
+    
+  </enterprise-beans>
+</jboss>
+
+
+

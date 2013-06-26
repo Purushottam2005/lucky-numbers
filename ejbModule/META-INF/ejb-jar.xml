@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ejb-jar xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:ejb="http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/ejb-jar_3_0.xsd" version="3.0">
+  <enterprise-beans>
+    <session>
+      <ejb-name>FancyListBean</ejb-name>
+      <business-remote>coreservlets.bean.FancyList</business-remote>
+      <ejb-class>coreservlets.bean.FancyListBean</ejb-class>
+      <session-type>Stateful</session-type>
+    </session>
+    <session>
+      <ejb-name>NumberListServiceBean</ejb-name>
+      <business-remote>coreservlets.bean.NumberListService</business-remote>
+      <ejb-class>coreservlets.bean.NumberListServiceBean</ejb-class>
+      <session-type>Stateless</session-type>
+    </session>
+    <session>
+      <ejb-name>NumberServiceBean</ejb-name>
+      <business-remote>coreservlets.bean.NumberService</business-remote>
+      <ejb-class>coreservlets.bean.NumberServiceBean</ejb-class>
+      <session-type>Stateless</session-type>
+    </session>
+    
+     <session>
+      <ejb-name>DataFetchServiceBean</ejb-name>
+      <business-remote>coreservlets.bean.DataFetchService</business-remote>
+      <ejb-class>coreservlets.bean.DataFetchServiceBean</ejb-class>
+      <session-type>Stateless</session-type>
+    </session>
+    
+    <session>
+      <ejb-name>UserManagementServiceBean</ejb-name>
+      <business-remote>com.management.user.UserManagementService</business-remote>
+      <ejb-class>com.management.user.UserManagementServiceBean</ejb-class>
+      <session-type>Stateless</session-type>
+    </session>
+    
+    <session>
+      <ejb-name>ReaderServiceBean</ejb-name>
+      <business-remote>coreservlets.bean.ReaderService</business-remote>
+      <ejb-class>coreservlets.bean.ReaderServiceBean</ejb-class>
+      <session-type>Stateless</session-type>
+    </session>
+    
+    
+  </enterprise-beans>
+</ejb-jar>
+<!-- 
+ <description>JBoss Message Driven Bean Tutorial</description>
+   <display-name>JBoss Message Driven Bean Tutorial</display-name>
+   <enterprise-beans>
+      <message-driven>
+     <ejb-name>ExampleMDB</ejb-name>
+     <ejb-class>org.jboss.tutorial.mdb_deployment_descriptor.bean.ExampleMDB</ejb-class>
+         <transaction-type>Bean</transaction-type>
+         <message-destination-type>javax.jms.Queue</message-destination-type>
+       <activation-config>   
+          <activation-config-property>
+            <activation-config-property-name>acknowledgeMode</activation-config-property-name>
+            <activation-config-property-value>AUTO_ACKNOWLEDGE</activation-config-property-value>
+          </activation-config-property>
+        </activation-config>
+      </message-driven>
+   </enterprise-beans>
+</ejb-jar>
+-->
