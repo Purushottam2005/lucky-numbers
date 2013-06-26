@@ -14,8 +14,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-//| id | title| link| publication_date| author | description
-
 @Entity(name="feed")
 public class Feed {
 
@@ -38,14 +36,8 @@ public class Feed {
 	@Column
 	private String description;
 	
-//	@ManyToOne(fetch=FetchType.LAZY)
-//	@JoinColumn(name="feedList")
-//	private User feedReader;
-
-	
 	@OneToMany(mappedBy="feed")
 	private List<Item> itemList; 
-	
 	
 	@ManyToMany
 	  @JoinTable(
@@ -53,34 +45,11 @@ public class Feed {
 	      joinColumns={@JoinColumn(name="feed_id", referencedColumnName="id")},
 	      inverseJoinColumns={@JoinColumn(name="reader_id", referencedColumnName="id")})
 	private List<User> userList	;
-	//private List<Project> projects;
-	
-	
-	
-	public List<Item> getItemList() {
-		return itemList;
-	}
 
-
-	public void setItemList(List<Item> itemList) {
-		this.itemList = itemList;
-	}
-
-
-	public List<User> getUserList() {
-		return userList;
-	}
-
-
-	public void setUserList(List<User> userList) {
-		this.userList = userList;
-	}
-
-
+	//FIXME if there is no other constructor, this one can be deleted
 	public Feed() {
 		super();
 	}
-
 
 	@Override
 	public String toString() {
@@ -92,21 +61,17 @@ public class Feed {
 				+ "[pubDate] : " +pubDate;
 	}
 
-
 	public int getId() {
 		return id;
 	}
-
 
 	public void setId(int id) {
 		this.id = id;
 	}
 
-
 	public String getTitle() {
 		return title;
 	}
-
 
 	public void setTitle(String title) {
 		this.title = title;
@@ -147,34 +112,28 @@ public class Feed {
 		return description;
 	}
 
-
 	public void setDescription(String description) {
 		this.description = description;
 	}
 
-//	public User getUser() {
-//		return feedReader;
-//	}
-//
-//
-//	public void setUser(User feedReader) {
-//		this.feedReader = feedReader;
-//	}
-	
-	
-	
-//	public void setField(String name, String value) {
-//		System.out.println("[[setField]]:"+name+" / "+value);
-//		try {
-//			this.getClass().getDeclaredField(name).set(this, value);
-//		} catch (IllegalArgumentException e) {
-//			System.err.println("Couldn't set property : " + name + " with value: " + value  + ".Error: " + e);
-//		} catch (SecurityException e) {
-//			System.err.println("Couldn't set property : " + name + " with value: " + value  + ".Error: " + e);
-//		} catch (IllegalAccessException e) {
-//			System.err.println("Couldn't set property : " + name + " with value: " + value  + ".Error: " + e);
-//		} catch (NoSuchFieldException e) {
-//			System.err.println("Couldn't set property : " + name + " with value: " + value  + ".Error: " + e);
-//		}
-//	}
+	public List<Item> getItemList() {
+		return itemList;
+	}
+
+
+	public void setItemList(List<Item> itemList) {
+		this.itemList = itemList;
+	}
+
+
+	public List<User> getUserList() {
+		return userList;
+	}
+
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
+
+
 }

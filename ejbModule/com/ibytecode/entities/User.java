@@ -9,35 +9,26 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 
 @Entity(name = "user")
 public class User implements Serializable {
-	
 
 	private static final long serialVersionUID = 3654205611614165482L;
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int id;
+	private long id;
 	@Column(nullable = false)
 	private String email;
 	@Column(nullable = false)
 	private String password;
 	
-	@Column
+	@Column(name="first_name")
 	private String firstName;
 	
-	@Column
+	@Column(name="last_name")
 	private String lastName;
 	
-//	@Column
-//	@OneToMany(mappedBy="feedReader")
-//	private List<Feed> feedList;
-//	
-
-	//@ManyToMany(mappedBy="projects")
-	//  private List<Employee> employees;
 	@ManyToMany(mappedBy="userList")
 	private List<Feed> feedList;
 	
@@ -49,19 +40,22 @@ public class User implements Serializable {
 		this.feedList = feedList;
 	}
 
-	public User() {
-		
-	}
-	
-	public User(String email, String password) {
+	public User(String email, String password, String firstName, String lastName) {
 		this.email = email;
 		this.password = password;
+		this.firstName = firstName;
+		this.lastName = lastName;
 	}
+
+//	public User(String email, String password) {
+//		this.email = email;
+//		this.password = password;
+//	}
 	
-	public int getId() {
+	public long getId() {
 		return id;
 	}
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 	public String getEmail() {
@@ -93,14 +87,6 @@ public class User implements Serializable {
 		this.lastName = lastName;
 	}
 	
-//	public List<Feed> getFeedList() {
-//		return feedList;
-//	}
-//
-//	public void setFeedList(List<Feed> feedList) {
-//		this.feedList = feedList;
-//	}
-	
 	@Override
 	public String toString() {
 		return " [email] : " + email +
@@ -109,5 +95,4 @@ public class User implements Serializable {
 			   " [lastName] : " + lastName
 			   ;
 	}
-	
 }
