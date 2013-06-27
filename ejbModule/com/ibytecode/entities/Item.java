@@ -33,7 +33,6 @@ public class Item {
 	
 	@ManyToOne(fetch=FetchType.LAZY)
 	@JoinColumn(name="feed_id")
-	//private int feedId; 
 	private Feed feed;
 	
 	public int getFeedId() {

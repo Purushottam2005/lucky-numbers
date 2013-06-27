@@ -11,5 +11,6 @@ public interface UserManagementService {
 	public void register(String email, String password, String firstName, String lastName);
 	public boolean login(String email, String password);
 	public List<User> getAllUsers();
+	public String getAllFeedsForUser(String userEmail) ;
 	public String getAllItemNewsForUser(String userEmail);
 }
