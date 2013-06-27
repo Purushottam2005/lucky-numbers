@@ -9,7 +9,8 @@
     <class>com.ibytecode.entities.Item</class>
     <class>com.ibytecode.entities.Feed</class>
         <properties>
-        	<property name="eclipselink.ddl-generation" value="create-tables" />
+        	<property name="eclipselink.ddl-generation" value="create-tables" /> 
+        	<!-- <property name="eclipselink.ddl-generation" value="create-or-extend-tables" /> -->
             <property name="showSql" value="true"/>
             <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQLDialect" />

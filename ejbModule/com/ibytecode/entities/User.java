@@ -31,6 +31,33 @@ public class User implements Serializable {
 	
 	@ManyToMany(mappedBy="userList")
 	private List<Feed> feedList;
+	// FIXME private Set<Feed> feedList; ???
+	
+	//@NotNull
+	//@Size(min = 10, max = 100)
+	//private String				title;
+	
+//	@Lob
+//	@NotNull
+//	@Size(min = 300, max = 4000)
+//	private String				content;
+	
+	/*
+	 * @Lob // <- The text from a blog entry might take some space so we’re predicting that with the @LoB annotation
+	private String				content;
+ 
+	private String				author;
+ 
+	@Temporal(TemporalType.TIMESTAMP) // <- We want to save the creation date of a blog entry as a timestamp and not a date – that’s why we add @Temporal(TemporalType.TIMESTAMP)
+	private Date				created = new Date();
+ 
+	@PrePersist			// <- To set the creation date on our first persist we’re using @PrePersist
+	private void onCreate() {
+		created = new Date();
+	}
+	 */
+	
+	
 	
 	public List<Feed> getFeedList() {
 		return feedList;
@@ -39,6 +66,11 @@ public class User implements Serializable {
 	public void setFeedList(List<Feed> feedList) {
 		this.feedList = feedList;
 	}
+	
+	public User() {
+	
+	}
+	
 
 	public User(String email, String password, String firstName, String lastName) {
 		this.email = email;

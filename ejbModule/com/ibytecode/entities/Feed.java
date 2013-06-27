@@ -2,6 +2,7 @@ package com.ibytecode.entities;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -39,11 +40,11 @@ public class Feed {
 	@OneToMany(mappedBy="feed")
 	private List<Item> itemList; 
 	
-	@ManyToMany
+	@ManyToMany(cascade=CascadeType.ALL)
 	  @JoinTable(
-	      name="JOIN_FEED_READER",
+	      name="join_feed_user",
 	      joinColumns={@JoinColumn(name="feed_id", referencedColumnName="id")},
-	      inverseJoinColumns={@JoinColumn(name="reader_id", referencedColumnName="id")})
+	      inverseJoinColumns={@JoinColumn(name="user_id", referencedColumnName="id")})
 	private List<User> userList	;
 
 	//FIXME if there is no other constructor, this one can be deleted

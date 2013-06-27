@@ -25,6 +25,10 @@ public class Item {
 	private String guid;
 	private String category;
 	
+	// 
+	//@Temporal(TemporalType.TIMESTAMP)
+	//private Date				created = new Date();
+	
 	//@Column(name="feed_id")
 	
 	@ManyToOne(fetch=FetchType.LAZY)
