@@ -42,8 +42,7 @@ public class UserManagementServiceBean implements UserManagementService, Seriali
 	@Override
 	public boolean login(String email, String password) {
 		System.out.println("inside UserManagementServiceBean, LOGIN, email: "  + email + " ,password: " + password);
-		TypedQuery<User> query = entityManager.createQuery("SELECT u FROM user u WHERE u.email = :email", User.class);
-		User user = query.setParameter("email", email).getSingleResult();
+		User user = getUserByEmail(email);
 		System.out.println("user :" + user);
 		return user != null && password.equals(user.getPassword());
 	}
@@ -67,54 +66,44 @@ public class UserManagementServiceBean implements UserManagementService, Seriali
 	//TODO 
 	//javax.persistence.NoResultException: No entity found for query
 	
+	//TODO refactor getAllItemNewsForUser, getAllFeedsForUser with generics 
 	
-	//public List<Item> getAllItemNewsForUser(String userEmail) {
-	public String getAllItemNewsForUser(String userEmail) {
-		System.out.println("-----------------------------------------------------------");
-		System.out.println("Inside getAllItemNewsForUser, userEmail : " + userEmail);
-		//List<Item> itemList = new ArrayList<Item>();
-		//TODO generally, we use userEmail to identify user whoose item news we' d like to fetch
-		// Now for simplicity we can use the hard coded value;
+	//public List<Item> getAllItemNewsForUser(String email) {
+	public Item getAllItemNewsForUser(String email) {
+		System.out.println("Inside getAllItemNewsForUser, userEmail : " + email);
 
-		TypedQuery<User> query = entityManager.createQuery("SELECT u FROM user u WHERE u.email = :email", User.class);
-		User user = query.setParameter("email", userEmail).getSingleResult();
+		User user = getUserByEmail(email);
 		
-		TypedQuery<Item> queryJoinTables = entityManager.
-				createQuery("Select i from item i join i.feed f join f.userList l where l.id = :id", Item.class);
-		 List<Item>  itemList = queryJoinTables.setParameter("id", user.getId()).getResultList();
+		TypedQuery<Item> queryJoinTables = entityManager.createQuery("Select i from item i join i.feed f join f.userList l where l.id = :id", Item.class);
+		List<Item> itemList = queryJoinTables.setParameter("id", user.getId()).getResultList();
 		
 		for (Item item : itemList) {
 		 System.out.println(item);	
 		}
-		System.out.println("-----------------------------------------------------------");
-		return "itemList";
+		return itemList.get(0);
 	} 
-	
-	
-	public String getAllFeedsForUser(String userEmail) {
-		System.out.println("-----------------------------------------------------------");
-		System.out.println("Inside getAllFeedsForUser, userEmail : " + userEmail);
-		//List<Item> itemList = new ArrayList<Item>();
-		//TODO generally, we use userEmail to identify user whoose item news we' d like to fetch
-		// Now for simplicity we can use the hard coded value;
-		//String hardCodedUserEmail  = "jjoinme@bk.ru";
-		//FIXME This piece of code is repeated with login
-		TypedQuery<User> query = entityManager.createQuery("SELECT u FROM user u WHERE u.email = :email", User.class);
-		User user = query.setParameter("email", userEmail).getSingleResult();
-		
-		TypedQuery<Feed> queryJoinTables = entityManager.
-				createQuery("Select f from feed f join f.userList l where l.id = :id", Feed.class);
-				//createQuery("Select f from feed f join f.userList i where i.user_id = :id", Feed.class);
 
-		//long hardCodedId = 1L;
-		//feedList = queryJoinTables.setParameter("id", hardCodedId).getResultList();
-		 List<Feed>  feedList = queryJoinTables.setParameter("id", user.getId()).getResultList();
+	//FIXME This piece of code is repeated with login
+	//public List<Feed> getAllFeedsForUser(String email) {
+	public Feed getAllFeedsForUser(String email) {
+		System.out.println("Inside getAllFeedsForUser, userEmail : " + email);
+
+		User user = getUserByEmail(email);
+		
+		TypedQuery<Feed> queryJoinTables = entityManager.createQuery("Select f from feed f join f.userList l where l.id = :id", Feed.class);
+
+		List<Feed> feedList = queryJoinTables.setParameter("id", user.getId()).getResultList();
 		
 		for (Feed feed : feedList) {
 			System.out.println(feed);
 		}
-		System.out.println("-----------------------------------------------------------");
-		return "feedList";
+		return feedList.get(0);
+	}
+
+
+	private User getUserByEmail(String email) {
+		TypedQuery<User> query = entityManager.createQuery("SELECT u FROM user u WHERE u.email = :email", User.class);
+		return query.setParameter("email", email).getSingleResult();
 	} 
 	
 	

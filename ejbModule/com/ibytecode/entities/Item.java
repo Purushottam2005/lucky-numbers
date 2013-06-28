@@ -1,5 +1,7 @@
 package com.ibytecode.entities;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,7 +12,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity(name = "item")
-public class Item {
+public class Item implements Serializable{
+
+	private static final long serialVersionUID = -7423538024777426730L;
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -39,9 +43,9 @@ public class Item {
 		return feed.getId();
 	}
 
-	public void setFeedId(int feedId) {
-		this.feed.setId(feedId);
-	}
+//	public void setFeedId(int feedId) {
+//		this.feed.setId(feedId);
+//	}
 
 	public int getId() {
 		return id;
