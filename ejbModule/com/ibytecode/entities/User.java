@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -29,7 +30,7 @@ public class User implements Serializable {
 	@Column(name="last_name")
 	private String lastName;
 	
-	@ManyToMany(mappedBy="userList")
+	@ManyToMany(mappedBy="userList", fetch = FetchType.LAZY)
 	private List<Feed> feedList;
 	// FIXME private Set<Feed> feedList; ???
 	

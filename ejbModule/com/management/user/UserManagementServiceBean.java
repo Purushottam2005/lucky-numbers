@@ -68,24 +68,29 @@ public class UserManagementServiceBean implements UserManagementService, Seriali
 	
 	//TODO refactor getAllItemNewsForUser, getAllFeedsForUser with generics 
 	
-	//public List<Item> getAllItemNewsForUser(String email) {
-	public Item getAllItemNewsForUser(String email) {
+	public List<Item> getAllItemNewsForUser(String email) {
+	//public Item getAllItemNewsForUser(String email) {
 		System.out.println("Inside getAllItemNewsForUser, userEmail : " + email);
 
 		User user = getUserByEmail(email);
 		
-		TypedQuery<Item> queryJoinTables = entityManager.createQuery("Select i from item i join i.feed f join f.userList l where l.id = :id", Item.class);
-		List<Item> itemList = queryJoinTables.setParameter("id", user.getId()).getResultList();
+		//TypedQuery<Item> queryJoinTables = entityManager.createQuery("Select i from item i join i.feed f join f.userList l where l.id = :id", Item.class);
+		//List<Item> itemList = queryJoinTables.setParameter("id", user.getId()).getResultList();
+		
+		TypedQuery<Item> queryJoinTables = entityManager.createQuery("Select i from item i", Item.class);
+		List<Item> itemList = queryJoinTables.getResultList();
 		
 		for (Item item : itemList) {
-		 System.out.println(item);	
+			System.out.println(item);	
 		}
-		return itemList.get(0);
+		//return itemList.get(0);
+		return itemList;
 	} 
 
 	//FIXME This piece of code is repeated with login
-	//public List<Feed> getAllFeedsForUser(String email) {
-	public Feed getAllFeedsForUser(String email) {
+	public List<Feed> getAllFeedsForUser(String email) {
+	//public Feed getAllFeedsForUser(String email) {
+	//public List<String> getAllFeedsForUser(String email) {
 		System.out.println("Inside getAllFeedsForUser, userEmail : " + email);
 
 		User user = getUserByEmail(email);
@@ -93,11 +98,16 @@ public class UserManagementServiceBean implements UserManagementService, Seriali
 		TypedQuery<Feed> queryJoinTables = entityManager.createQuery("Select f from feed f join f.userList l where l.id = :id", Feed.class);
 
 		List<Feed> feedList = queryJoinTables.setParameter("id", user.getId()).getResultList();
-		
+		List<String> feedStringList = new ArrayList<String>();
 		for (Feed feed : feedList) {
 			System.out.println(feed);
+			feedStringList.add(feed.toString());
 		}
-		return feedList.get(0);
+		
+		
+		//return feedList.get(0);
+		return feedList;
+		//return feedStringList;
 	}
 
 

@@ -19,14 +19,50 @@ public class Item implements Serializable{
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-
+	@Column
 	private String title;
-	private String link; 
+	@Column
+	private String link;
+	@Column
 	private String description;
 	
 	@Column(name="publication_date")
 	private String pubDate;
+	@Column
 	private String guid;
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setPubDate(String pubDate) {
+		this.pubDate = pubDate;
+	}
+
+	public void setGuid(String guid) {
+		this.guid = guid;
+	}
+
+	public void setCategory(String category) {
+		this.category = category;
+	}
+
+	public void setFeed(Feed feed) {
+		this.feed = feed;
+	}
+
+	@Column
 	private String category;
 	
 	// 
@@ -35,7 +71,8 @@ public class Item implements Serializable{
 	
 	//@Column(name="feed_id")
 	
-	@ManyToOne(fetch=FetchType.LAZY)
+	//@ManyToOne(fetch=FetchType.LAZY) // Failed with $$_javassist_1
+	@ManyToOne(fetch=FetchType.EAGER) //!!!!
 	@JoinColumn(name="feed_id")
 	private Feed feed;
 	
@@ -51,58 +88,35 @@ public class Item implements Serializable{
 		return id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
-	}
-	
+
+
 	public String getTitle() {
 		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
 	}
 
 	public String getLink() {
 		return link;
 	}
 
-	public void setLink(String link) {
-		this.link = link;
-	}
-
 	public String getDescription() {
 		return description;
-	}
-	
-	public void setDescription(String description) {
-		this.description = description;
 	}
 
 	public String getPubDate() {
 		return pubDate;
 	}
 
-	public void setPubDate(String pubDate) {
-		this.pubDate = pubDate;
-	}
-
 	public String getGuid() {
 		return guid;
-	}
-
-	public void setGuid(String guid) {
-		this.guid = guid;
 	}
 
 	public String getCategory() {
 		return category;
 	}
 
-	public void setCategory(String category) {
-		this.category = category;
+	public Feed getFeed() {
+		return feed;
 	}
-
 
 	@Override
 	public String toString() {

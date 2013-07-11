@@ -32,5 +32,8 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="lib" path="C:/Users/dev/apache/lang/apache-commons-lang.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dev/Hibernate/hibernate-core-4.2.2.Final.jar"/>
+	<classpathentry kind="lib" path="C:/Users/dev/Hibernate/hibernate-entitymanager-4.2.2.Final.jar"/>
+	<classpathentry kind="lib" path="C:/jboss-7.1.1/modules/org/jboss/as/jpa/hibernate/4/jboss-as-jpa-hibernate4-7.1.1.Final.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

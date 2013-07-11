@@ -6,19 +6,18 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity(name="feed")
 public class Feed implements Serializable {
-
-
-
 	private static final long serialVersionUID = -8084827977542098341L;
 
 	@Id
@@ -40,10 +39,10 @@ public class Feed implements Serializable {
 	@Column
 	private String description;
 	
-	@OneToMany(mappedBy="feed")
+	@OneToMany( mappedBy="feed", fetch = FetchType.LAZY)
 	private List<Item> itemList; 
 	
-	@ManyToMany(cascade=CascadeType.ALL)
+	@ManyToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
 	  @JoinTable(
 	      name="join_feed_user",
 	      joinColumns={@JoinColumn(name="feed_id", referencedColumnName="id")},
@@ -95,6 +94,38 @@ public class Feed implements Serializable {
 
 	public List<User> getUserList() {
 		return userList;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
+	}
+
+	public void setPubDate(String pubDate) {
+		this.pubDate = pubDate;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public void setItemList(List<Item> itemList) {
+		this.itemList = itemList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
 	}
 
 	
