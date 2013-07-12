@@ -36,7 +36,7 @@ public class UserManagementServiceBean implements UserManagementService, Seriali
 		System.out.println("Insert is completed...");
 	}
 
-	
+	//FIXME is there any need in this method ?
 	public String fetchData(int feedId) {
 	//	Project p = entityManager.find(Project.class, projectNumber );
 	//	return (p != null)? p.toString():"No project with project No: " + projectNumber;
@@ -46,16 +46,19 @@ public class UserManagementServiceBean implements UserManagementService, Seriali
 
 
 	@Override
-	public User login(String email, String password) {
-		System.out.println("inside UserManagementServiceBean, LOGIN, email: " + email + " ,password: " + password);
-		User user = fetchUserByParameter(email, USER_BY_EMAIL_QUERY);
-		return user == null || isPasswordWrong(user, password) ? null : user;
+	// FIXME is there any need in login()- method, when  
+	// we have fetchUserByParameter, and password-check we can do on client !
+	//public User login(String email, String password) {
+	public User login(String email) {
+		System.out.println("inside UserManagementServiceBean, LOGIN, email: " + email);
+		return fetchUserByParameter(email, USER_BY_EMAIL_QUERY);
+		//return user == null || isPasswordWrong(user, password) ? null : user;
 	}
 	
 	
-	private boolean isPasswordWrong(User user, String password) {
-		return !password.equals(user.getPassword());
-	}
+//	private boolean isPasswordWrong(User user, String password) {
+//		return !password.equals(user.getPassword());
+//	}
 
 
 	public boolean isUserRegisteredAlready(String email) {
@@ -64,7 +67,18 @@ public class UserManagementServiceBean implements UserManagementService, Seriali
 		User user = fetchUserByParameter(email, USER_BY_EMAIL_QUERY);
 		System.out.println("user :" + user);
 		return user != null;
+	
+		//FIXME If there is no use, NoResultException will be trown
+//		try{
+//	        return entityManager.createQuery(query, User.class).setParameter(1, parameter).getSingleResult();
+//	    } catch(NoResultException e) {
+//	    	System.err.println("No user found with parameter: " + parameter + " and query: " + query + ", message: " + e);
+//	    	return null;
+//	    }
+		
 	}
+	
+	
 	
 	
 	public List<User> getAllUsers() {
@@ -83,27 +97,8 @@ public class UserManagementServiceBean implements UserManagementService, Seriali
 
 
 	
-	//FIXME This piece of code is repeated with login
 	
-	//TODO refactor getAllItemNewsForUser, getAllFeedsForUser with generics 
-
-//	public List<Item> getAllItemNewsForUser(String email) {
-//		System.out.println("Inside getAllItemNewsForUser, userEmail : " + email);
-//		User user = fetchUserByParameter(email, USER_BY_EMAIL_QUERY);
-//		TypedQuery<Item> queryJoinTables = entityManager.createQuery(ITEM_LIST_OF_USER_QUERY, Item.class);
-//		List<Item> itemList = queryJoinTables.setParameter("id", user.getId()).getResultList();
-//		return itemList;
-//	} 
-//
-//	public List<Feed> getAllFeedsForUser(String email) {
-//		System.out.println("Inside getAllFeedsForUser, userEmail : " + email);
-//		User user = fetchUserByParameter(email, USER_BY_EMAIL_QUERY);
-//		TypedQuery<Feed> queryJoinTables = entityManager.createQuery(FEED_LIST_OF_USER_QUERY, Feed.class);
-//		List<Feed> feedList = queryJoinTables.setParameter("id", user.getId()).getResultList();
-//		return feedList;
-//	}
-
-	
+	//TODO further refactoring 
 	public List<Item> getAllItemNewsForUser(String email) {
 		return getListOfInterst(fetchUserByParameter(email, USER_BY_EMAIL_QUERY).getId(), ITEM_LIST_OF_USER_QUERY, Item.class);
 	} 
@@ -125,9 +120,3 @@ public class UserManagementServiceBean implements UserManagementService, Seriali
 	    }
 	} 
 }
-
-//	private User fetchUserByEmail(String email) {
-//		//return entityManager.createQuery("SELECT u FROM user u WHERE u.email = :email", User.class).setParameter("email", email).getSingleResult();
-//		return entityManager.createQuery(USER_BY_EMAIL_QUERY, User.class).setParameter(1, email).getSingleResult();
-//	} 
-//	
