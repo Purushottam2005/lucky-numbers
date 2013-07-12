@@ -29,9 +29,10 @@ public class UserManagementServiceBean implements UserManagementService, Seriali
 	    private EntityManager entityManager;
 	
 	@Override
-	public void register(String email, String password, String firstName, String lastName) {
-		System.out.println("inside UserManagementServiceBean, REGISTER,  email: "  + email + " password: " + password + " firstName : " + firstName + " lastName: "+ lastName);		
-		entityManager.persist(new User(email, password, firstName, lastName)); 
+	public void register(User user) {
+		System.out.println("inside UserManagementServiceBean, REGISTER,  email: "  + user.getEmail() +
+				" password: " + user.getPassword() + " firstName : " + user.getFirstName() + " lastName: "+ user.getLastName());		
+		entityManager.persist(user);
 		entityManager.flush();
 		System.out.println("Insert is completed...");
 	}

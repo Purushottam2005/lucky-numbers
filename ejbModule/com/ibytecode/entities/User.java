@@ -11,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
+//@Table(name = "USERS", uniqueConstraints = @UniqueConstraint(columnNames = {"TENANT_ID", "username"}))
+
 @Entity(name = "user")
 public class User implements Serializable {
 
@@ -19,8 +21,12 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id;
-	@Column(nullable = false)
+
+	//@Column(nullable = false )
+	@Column(nullable = false, unique=true)
 	private String email;
+	
+	
 	@Column(nullable = false)
 	private String password;
 	
